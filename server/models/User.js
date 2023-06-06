@@ -1,9 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// import schema from Park.js
-const parkSchema = require('./Park');
-const destinationSchema = require('./Destinations');
+// import schema from Comment.js
+const reviewSchema = require('./Review');
 
 
 const userSchema = new Schema(
@@ -23,7 +22,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    comments: [parkSchema, destinationSchema],
+    comments: [reviewSchema],
   },
   {
     toJSON: {
