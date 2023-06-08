@@ -5,7 +5,7 @@ import { SAVE_PARK } from '../utils/mutations';
 import { searchParks } from '../utils/API';
 import { addParkToProfile, removeParkFromProfile, getSavedParkIds } from '../utils/localStorage';
 import Auth from '../utils/auth';
-import ReviewPark from './reviewpark';
+import ReviewPark from './ReviewPark';
 
 const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
