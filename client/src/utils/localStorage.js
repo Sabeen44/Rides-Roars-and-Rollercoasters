@@ -14,6 +14,14 @@ export const saveParks = (parkArr) => {
   }
 };
 
+export const getSavedParkIds = () => {
+  const savedParkIds = localStorage.getItem('profileParks')
+    ? JSON.parse(localStorage.getItem('profileParks'))
+    : [];
+
+  return savedParkIds;
+};
+
 export const addParkToProfile = (parkId) => {
   const profileParks = localStorage.getItem('profileParks')
     ? JSON.parse(localStorage.getItem('profileParks'))
