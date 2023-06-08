@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { addReviewToPark } from '../utils/localStorage';
 
 const ReviewPark = ({ parkId, onSaveReview }) => {
   const [reviewText, setReviewText] = useState('');
@@ -17,11 +18,15 @@ const ReviewPark = ({ parkId, onSaveReview }) => {
     const newReview = {
       parkId: parkId,
       reviewText: reviewText,
-      rating: rating
+      rating: rating,
+      reviewId: Math.floor(Math.random() * 1000) // Generate a random review ID
     };
 
     // Call the onSaveReview function passed from the parent component
     onSaveReview(newReview);
+
+    // Add the review to the park
+    addReviewToPark(parkId, newReview.reviewId);
 
     // Clear the form inputs
     setReviewText('');
