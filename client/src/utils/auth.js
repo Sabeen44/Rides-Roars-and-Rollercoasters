@@ -1,5 +1,9 @@
 // use this to decode a token and get the user's information out of it
-import decode from 'jwt-decode';
+// <<<<<<< feature/utils
+// import decode from 'jwt-decode';
+// =======
+// import decode from "jwt-decode";
+// >>>>>>> main
 
 // create a new class to instantiate for a user
 class AuthService {
@@ -28,22 +32,37 @@ class AuthService {
   }
 
   getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token');
-  }
+//     // Retrieves the user token from localStorage
+// <<<<<<< feature/utils
+//     return localStorage.getItem('id_token');
+// =======
+//     return localStorage.getItem("id_token");
+// >>>>>>> main
+//   }
 
-  login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
-  }
+//   login(idToken) {
+//     // Saves user token to localStorage
+// <<<<<<< feature/utils
+//     localStorage.setItem('id_token', idToken);
+//     window.location.assign('/');
+// =======
+//     localStorage.setItem("id_token", idToken);
+//     window.location.assign("/");
+// >>>>>>> main
+//   }
 
-  logout() {
-    // Clear user token and profile data from localStorage
-    localStorage.removeItem('id_token');
-    // this will reload the page and reset the state of the application
-    window.location.assign('/');
-  }
+//   logout() {
+//     // Clear user token and profile data from localStorage
+// <<<<<<< feature/utils
+//     localStorage.removeItem('id_token');
+//     // this will reload the page and reset the state of the application
+//     window.location.assign('/');
+// =======
+//     localStorage.removeItem("id_token");
+//     // this will reload the page and reset the state of the application
+//     window.location.assign("/");
+// >>>>>>> main
+//   }
 }
 
 export default new AuthService();
