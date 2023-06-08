@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, Col, Container, Form, Row, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { SAVE_PARK } from '../utils/mutations';
-import { searchThemeParks } from '../utils/API';
+import { searchParks } from '../utils/API';
 import { addParkToProfile, removeParkFromProfile, getSavedParkIds } from '../utils/localStorage';
 import Auth from '../utils/auth';
 import ReviewPark from './reviewpark';
@@ -22,7 +22,7 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await searchThemeParks(searchInput);
+      const response = await searchParks(searchInput);
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -82,7 +82,10 @@ const SearchPark = () => {
     try {
       await removeParkFromProfile(parkId);
 
-      setSelectedPark(null);
+      if (selectedPark && selectedPark.parkId === parkId) {
+        setSelectedPark(null);
+      }
+
       setSavedParkIds(getSavedParkIds()); // Update the saved park IDs
     } catch (err) {
       console.error(err);
@@ -123,15 +126,23 @@ const SearchPark = () => {
                     )}
                   </Card.Body>
                   {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedParkIds?.some((savedParkId) => savedParkId === park.parkId)}
-                      className="btn-block btn-info"
-                      onClick={() => handleSavePark(park.parkId)}
-                    >
-                      {savedParkIds?.some((savedParkId) => savedParkId === park.parkId)
-                        ? 'Park saved'
-                        : 'Save park'}
-                    </Button>
+                    <>
+                      <Button
+                        disabled={savedParkIds?.some((savedParkId) => savedParkId === park.parkId)}
+                        className="btn-block btn-info"
+                        onClick={() => handleSavePark(park.parkId)}
+                      >
+                        {savedParkIds?.some((savedParkId) => savedParkId === park.parkId)
+                          ? 'Park saved'
+                          : 'Save park'}
+                      </Button>
+                      <Button
+                        className="btn-block btn-danger"
+                        onClick={() => handleRemovePark(park.parkId)}
+                      >
+                        Remove park
+                      </Button>
+                    </>
                   )}
                 </Card>
               </Col>
