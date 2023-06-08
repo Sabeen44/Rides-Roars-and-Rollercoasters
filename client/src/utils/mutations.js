@@ -24,23 +24,27 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_REVIEW = gql`
-  mutation saveReview($reviewData: ReviewInput!) {
-    saveReview(bookReview: $reviewData) {
+// <<<<<<< feature/app.js
+// export const SAVE_REVIEW = gql`
+//   mutation saveReview($reviewData: ReviewInput!) {
+//     saveReview(bookReview: $reviewData) {
+// =======
+// export const SAVE_PARK = gql`
+//   mutation savePark($parkData: ParkInput!) {
+//     savePark(parkData: $parkData) {
+// >>>>>>> main
       _id
-      username
-      email
-
-      savedReviews {
-        reviewId
+      name
+      reviews {
+        _id
         user
         title
-        description
       }
     }
   }
 `;
 
+ feature/app.js
 export const REMOVE_REVIEW = gql`
   mutation removeReview($reviewId: ID!) {
     removeReview(reviewId: $reviewId) {
@@ -51,10 +55,41 @@ export const REMOVE_REVIEW = gql`
       mi
       savedReviews {
         reviewId
+=======
+export const REMOVE_PARK = gql`
+  mutation removePark($parkId: ID!) {
+    removePark(parkId: $parkId) {
+      _id
+      name
+      reviews {
+        _id
+ main
         user
         title
-        description
       }
     }
   }
 `;
+
+export const SAVE_REVIEW = gql`
+  mutation saveReview($reviewData: ReviewInput!) {
+    saveReview(reviewData: $reviewData) {
+      _id
+      user
+      title
+      description
+    }
+  }
+`;
+
+export const REMOVE_REVIEW = gql`
+  mutation removeReview($reviewId: ID!) {
+    removeReview(reviewId: $reviewId) {
+      _id
+      user
+      title
+      description
+    }
+  }
+`;
+
