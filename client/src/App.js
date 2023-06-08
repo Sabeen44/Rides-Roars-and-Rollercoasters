@@ -1,10 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,} from "@apollo/client";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-import Navbar from './components/Navbar';
+import  page from "./pages/";
+import page from "./pages/";
+import Navbar from "./components/Navbar";
 
 const httpLink = createHttpLink({
   uri: "./graphql",
@@ -32,23 +37,17 @@ function App() {
         <>
           <Navbar />
           <Routes>
-            <Route 
-              path="/" 
-              element={<SearchBooks />} 
-            />
-            <Route 
-              path="/saved" 
-              element={<SavedBooks />} 
-            />
-            <Route 
-              path="*" 
-              element={<h1 className="display-2">Wrong page!</h1>} 
+            <Route path="/" element={<SearchReviews />} />
+            <Route path="/saved" element={<SavedReviews />} />
+            <Route
+              path="*"
+              element={<h1 className="display-2">Wrong page!</h1>}
             />
           </Routes>
         </>
       </Router>
     </ApolloProvider>
   );
-};
+}
 
 export default App;
