@@ -24,7 +24,7 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_BOOK = gql`
+export const SAVE_REVIEW = gql`
   mutation saveReview($reviewData: ReviewInput!) {
     saveReview(bookReview: $reviewData) {
       _id
@@ -41,13 +41,14 @@ export const SAVE_BOOK = gql`
   }
 `;
 
-export const REMOVE_BOOK = gql`
+export const REMOVE_REVIEW = gql`
   mutation removeReview($reviewId: ID!) {
     removeReview(reviewId: $reviewId) {
       _id
       username
       email
-      bookCount
+      updated
+      mi
       savedReviews {
         reviewId
         user
