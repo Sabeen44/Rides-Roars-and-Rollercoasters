@@ -3,7 +3,7 @@ import { Card, Col, Container, Form, Row, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { SAVE_PARK } from '../utils/mutations';
 import { searchThemeParks } from '../utils/API';
-import { saveParkIds, getSavedParkIds } from '../utils/localStorage';
+import { addParkToProfile, removeParkFromProfile, getSavedParkIds } from '../utils/localStorage';
 import Auth from '../utils/auth';
 import ReviewPark from './reviewpark';
 
@@ -55,12 +55,13 @@ const SearchPark = () => {
         variables: { input: parkToSave },
       });
 
-      if (!response.ok) {
+      if (!response.data) {
         throw new Error('Something went wrong!');
       }
 
-      setSavedParkIds([...savedParkIds, parkToSave.parkId]);
+      addParkToProfile(parkToSave.parkId);
       setSelectedPark(parkToSave);
+      setSavedParkIds(getSavedParkIds()); // Update the saved park IDs
     } catch (err) {
       console.error(err);
     }
@@ -71,6 +72,23 @@ const SearchPark = () => {
     console.log('Review:', review);
   };
 
+  const handleRemovePark = async (parkId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      await removeParkFromProfile(parkId);
+
+      setSelectedPark(null);
+      setSavedParkIds(getSavedParkIds()); // Update the saved park IDs
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -79,6 +97,20 @@ const SearchPark = () => {
             ? `Viewing ${searchedParks.length} results:`
             : 'Search for a theme park to begin'}
         </h2>
+        <Form onSubmit={handleFormSubmit}>
+          <Form.Group>
+            <Form.Label>Search Parks</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter a park name"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Search
+          </Button>
+        </Form>
         <Row>
           {searchedParks.map((park) => {
             return (
@@ -98,8 +130,7 @@ const SearchPark = () => {
                     >
                       {savedParkIds?.some((savedParkId) => savedParkId === park.parkId)
                         ? 'Park saved'
-                        : 'Save park'
-                    }
+                        : 'Save park'}
                     </Button>
                   )}
                 </Card>
