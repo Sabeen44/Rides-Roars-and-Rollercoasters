@@ -9,7 +9,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import ReviewParks from "./pages/";
-import SearchParks from "./pages/";
+import SearchReviews from "./pages/";
 
 import Navbar from "./components/Navbar";
 
