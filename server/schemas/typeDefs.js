@@ -51,6 +51,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addComment(commentId: ID!, commentText: String!): Comment
+    addPark(park:String)
     savePark(parkData: parkInput!): User
     removePark(parkId: ID!): User
     addReview(reviewData: reviewInput!): User
