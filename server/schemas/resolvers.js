@@ -1,17 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
-//const { Park } = require("../models");
+const { User, Park, Review } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
-  // Query: {
-  //   me: (parent, args, context) => {
-  //     if (!context.user) {
-  //       throw new AuthenticationError("Not logged in");
-  //     }
-  //     return context.user;
-  //   },
-  // },
-
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
@@ -26,7 +17,7 @@ const resolvers = {
     },
 
     park: async (parent, args, context) => {
-      const parkData = await Park.findOne({ _id: context.park._id });
+      const parkData = await Park.findOne({ _id: args.parkId });
       return parkData;
     },
   },
@@ -38,6 +29,7 @@ const resolvers = {
 
       return { token, user };
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -56,21 +48,23 @@ const resolvers = {
     },
 
     addReview: async (parent, { reviewInput }, context) => {
-      // check if the user is logged in
       if (context.user) {
-        // create a new review document with the input data and the user id
         const newReview = await Review.create({
           ...reviewInput,
-          user: context.user._id,
+          reviewUser: context.user.username,
         });
+
+        return newReview;
       }
+
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     saveReview: async (parent, { reviewData }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedReviews: reviewData } },
+          { $push: { comments: reviewData } },
           { new: true }
         );
 
@@ -79,11 +73,12 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in");
     },
+
     removeReview: async (parent, { reviewId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedReviews: { reviewId } } },
+          { $pull: { comments: { _id: reviewId } } },
           { new: true }
         );
 
@@ -92,32 +87,33 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in");
     },
-  },
-  addPark: async (parent, { parkInput }, context) => {
-    if (context.user) {
-      const newPark = await Park.create({
-        ...parkInput,
-        user: context.user._id,
-      });
 
-      return newPark;
-    }
+    addPark: async (parent, { parkInput }, context) => {
+      if (context.user) {
+        const newPark = await Park.create({
+          ...parkInput,
+          user: context.user._id,
+        });
 
-    throw new AuthenticationError("You need to be logged in!");
-  },
+        return newPark;
+      }
 
-  savePark: async (parent, { parkData }, context) => {
-    if (context.user) {
-      const updatedUser = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $push: { savedParks: parkData } },
-        { new: true }
-      );
+      throw new AuthenticationError("You need to be logged in!");
+    },
 
-      return updatedUser;
-    }
+    savePark: async (parent, { parkData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedParks: parkData } },
+          { new: true }
+        );
 
-    throw new AuthenticationError("You need to be logged in!");
+        return updatedUser;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 
