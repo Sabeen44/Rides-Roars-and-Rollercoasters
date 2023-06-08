@@ -24,36 +24,53 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveReview($reviewData: ReviewInput!) {
-    saveReview(bookReview: $reviewData) {
+export const SAVE_PARK = gql`
+  mutation savePark($parkData: ParkInput!) {
+    savePark(parkData: $parkData) {
       _id
-      username
-      email
-
-      savedReviews {
-        reviewId
+      name
+      reviews {
+        _id
         user
         title
-        description
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
+export const REMOVE_PARK = gql`
+  mutation removePark($parkId: ID!) {
+    removePark(parkId: $parkId) {
+      _id
+      name
+      reviews {
+        _id
+        user
+        title
+      }
+    }
+  }
+`;
+
+export const SAVE_REVIEW = gql`
+  mutation saveReview($reviewData: ReviewInput!) {
+    saveReview(reviewData: $reviewData) {
+      _id
+      user
+      title
+      description
+    }
+  }
+`;
+
+export const REMOVE_REVIEW = gql`
   mutation removeReview($reviewId: ID!) {
     removeReview(reviewId: $reviewId) {
       _id
-      username
-      email
-      bookCount
-      savedReviews {
-        reviewId
-        user
-        title
-        description
-      }
+      user
+      title
+      description
     }
   }
 `;
+
