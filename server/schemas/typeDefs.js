@@ -19,6 +19,24 @@ const typeDefs = gql`
     content: String!
   }
 
+  type Comment {
+    id: ID!
+    commentText: String!
+  }
+
+  input parkInput {
+    name: String!
+    location: String!
+    description: String!
+  }
+
+  input reviewInput {
+  title: String!
+  content: String!
+  rating: Int!
+  description: String!
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -35,6 +53,7 @@ const typeDefs = gql`
     addComment(commentId: ID!, commentText: String!): Comment
     savePark(parkData: parkInput!): User
     removePark(parkId: ID!): User
+    addReview(reviewData: reviewInput!): User
     saveReview(reviewData: reviewInput!): User
     removeReview(reviewId: ID!): User
   }

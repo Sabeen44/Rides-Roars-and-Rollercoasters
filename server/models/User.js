@@ -1,9 +1,23 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// import schema from Comment.js
-const reviewSchema = require('./Review');
+// Import the Review model
+const Review = require('./Review');
 
+const reviewSchema = new Schema({
+  reviewText: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 280,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+  },
+});
 
 const userSchema = new Schema(
   {
@@ -22,7 +36,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    comments: [reviewSchema],
+    reviews: [reviewSchema], // Use the Review schema here
   },
   {
     toJSON: {
@@ -44,8 +58,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('commentCount').get(function () {
-  return this.comments.length;
+userSchema.virtual('reviewCount').get(function () {
+  return this.reviews.length;
 });
 
 const User = model('User', userSchema);
