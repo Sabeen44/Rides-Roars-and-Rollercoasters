@@ -17,7 +17,6 @@ const typeDefs = gql`
     id: ID!
     title: String!
     content: String!
-    rating: Int! #   user: User!}
   }
 
   type Auth {
@@ -27,13 +26,14 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    park: Park
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addComment(commentId: ID!, commentText: String!): Comment
-    saveReview(reviewData: reviewInput!): User
+    addReview(reviewId: ID!, reviewText: String!): Review
+    saveReview(reviewData: reviewInput): User
     removeReview(reviewId: ID!): User
   }
 `;
