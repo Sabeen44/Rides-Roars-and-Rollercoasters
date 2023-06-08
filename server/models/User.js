@@ -2,22 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // Import the Review model
-const Review = require('./Review');
-
-const reviewSchema = new Schema({
-  reviewText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-});
+const reviewSchema = require('./Review');
 
 const userSchema = new Schema(
   {
