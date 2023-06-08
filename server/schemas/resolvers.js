@@ -24,6 +24,11 @@ const resolvers = {
 
       throw new AuthenticationError("You are not logged in");
     },
+
+    park: async (parent, args, context) => {
+      const parkData = await Park.findOne({ _id: context.park._id });
+      return parkData;
+    },
   },
 
   Mutation: {
@@ -49,6 +54,18 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
+    addReview: async (parent, { reviewInput }, context) => {
+      // check if the user is logged in
+      if (context.user) {
+        // create a new review document with the input data and the user id
+        const newReview = await Review.create({
+          ...reviewInput,
+          user: context.user._id,
+        });
+      }
+    },
+
     saveReview: async (parent, { reviewData }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
@@ -75,6 +92,32 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in");
     },
+  },
+  addPark: async (parent, { parkInput }, context) => {
+    if (context.user) {
+      const newPark = await Park.create({
+        ...parkInput,
+        user: context.user._id,
+      });
+
+      return newPark;
+    }
+
+    throw new AuthenticationError("You need to be logged in!");
+  },
+
+  savePark: async (parent, { parkData }, context) => {
+    if (context.user) {
+      const updatedUser = await User.findByIdAndUpdate(
+        { _id: context.user._id },
+        { $push: { savedParks: parkData } },
+        { new: true }
+      );
+
+      return updatedUser;
+    }
+
+    throw new AuthenticationError("You need to be logged in!");
   },
 };
 
