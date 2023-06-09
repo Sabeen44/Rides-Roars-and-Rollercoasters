@@ -14,7 +14,7 @@ const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [savedParkIds, setSavedParkIds] = useState(getSavedParkIds());
-  //const [savePark, { error }] = useMutation(SAVE_PARK);
+  const [savePark, { error }] = useMutation(SAVE_PARK);
   const [selectedPark, setSelectedPark] = useState(null);
 
   const handleFormSubmit = async (event) => {
