@@ -31,10 +31,10 @@ const typeDefs = gql`
   }
 
   input reviewInput {
-  title: String!
-  content: String!
-  rating: Int!
-  description: String!
+    title: String!
+    content: String!
+    rating: Int!
+    description: String!
   }
 
   type Auth {
@@ -51,7 +51,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addComment(commentId: ID!, commentText: String!): Comment
-    addPark(park:String)
+    addPark(park: String): Park
     savePark(parkData: parkInput!): User
     removePark(parkId: ID!): User
     addReview(reviewData: reviewInput!): User

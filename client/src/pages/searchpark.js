@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { SAVE_PARK } from "../utils/mutations";
-import { searchParks } from "../utils/API";
 import {
   addParkToProfile,
   removeParkFromProfile,
@@ -26,7 +25,7 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await searchParks(searchInput);
+      const response = await SearchPark(searchInput);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
