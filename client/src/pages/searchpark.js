@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { SAVE_PARK } from "../utils/mutations";
-import { searchParks } from "../utils/API";
 import {
   addParkToProfile,
   removeParkFromProfile,
@@ -15,7 +14,7 @@ const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [savedParkIds, setSavedParkIds] = useState(getSavedParkIds());
-  const [savePark, { error }] = useMutation(SAVE_PARK);
+  //const [savePark, { error }] = useMutation(SAVE_PARK);
   const [selectedPark, setSelectedPark] = useState(null);
 
   const handleFormSubmit = async (event) => {
@@ -26,7 +25,7 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await searchParks(searchInput);
+      const response = await SearchPark(searchInput);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");

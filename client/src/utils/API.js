@@ -85,7 +85,7 @@ export const deleteReview = (reviewId, token) => {
 };
 
 // make a search for parks
-export const searchParks = (query) => {
+export const SearchParks = (query) => {
   return fetch(`https://api.themeparks.wiki/docs/v1/#/destinations/${query}`);
 };
 
