@@ -56,8 +56,7 @@ const resolvers = {
 
         return newReview;
       }
-
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError("No Review!");
     },
 
     saveReview: async (parent, { reviewData }, context) => {

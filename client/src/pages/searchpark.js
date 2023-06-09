@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { SAVE_PARK } from "../utils/mutations";
@@ -6,23 +6,10 @@ import {
   addParkToProfile,
   removeParkFromProfile,
   getSavedParkIds,
+  saveParkIds,
 } from "../utils/localStorage";
 import Auth from "../utils/auth";
 import ReviewPark from "./ReviewPark";
-
-const searchParks = async (searchInput) => {
-  try {
-    const response = await fetch(`https://api.themeparks.wiki/v1/destinations/${searchInput}`);
-    if (!response.ok) {
-      throw new Error("Something went wrong!");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
 
 const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
@@ -30,6 +17,10 @@ const SearchPark = () => {
   const [savedParkIds, setSavedParkIds] = useState(getSavedParkIds());
   const [savePark, { error }] = useMutation(SAVE_PARK);
   const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(() => {
+    return () => saveParkIds(savedParkIds);
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -39,7 +30,7 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await searchParks(searchInput);
+      const response = await SearchParks(searchInput);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
