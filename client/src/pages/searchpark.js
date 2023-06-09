@@ -10,20 +10,6 @@ import {
 import Auth from "../utils/auth";
 import ReviewPark from "./ReviewPark";
 
-const searchParks = async (searchInput) => {
-  try {
-    const response = await fetch(`https://api.themeparks.wiki/v1/destinations/${searchInput}`);
-    if (!response.ok) {
-      throw new Error("Something went wrong!");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
 const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -39,7 +25,7 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await searchParks(searchInput);
+      const response = await SearchPark(searchInput);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");

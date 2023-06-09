@@ -84,8 +84,8 @@ export const deleteReview = (reviewId, token) => {
   });
 };
 
-// make a search for parks
-export const SearchParks = (query) => {
-  return fetch(`https://api.themeparks.wiki/docs/v1/#/destinations/${query}`);
-};
+// // make a search for parks
+// export const searchParks = (query) => {
+//   return fetch(`https://api.themeparks.wiki/v1/destinations/${query}`);
+// };
 
