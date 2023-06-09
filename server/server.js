@@ -10,9 +10,8 @@ const app = express();
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers, 
+  resolvers,
   context: authMiddleware,
-  persistedQueries: false, 
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,16 +19,18 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
-};
+}
 
-const startApolloServer = async (typeDefs, resolvers) => {
+const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app });
 
   db.once("open", () => {
+    server.applyMiddleware({ app });
+
     app.listen(PORT, () => {
-      console.log(`🌍 Now listening on localhost:${PORT}`)});
+      console.log(`🌍 Now listening on localhost:${PORT}`);
+    });
   });
 };
 
-startApolloServer(typeDefs, resolvers);
+startApolloServer();
