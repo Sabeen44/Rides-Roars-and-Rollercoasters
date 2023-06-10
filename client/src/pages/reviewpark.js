@@ -1,67 +1,73 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { addReviewToPark } from '../utils/localStorage';
+import { Card, Button } from 'react-bootstrap';
+import ReviewPark from './ReviewPark';
 
-const ReviewPark = ({ parkId, onSaveReview }) => {
-  const [reviewText, setReviewText] = useState('');
-  const [rating, setRating] = useState(0);
+const ParkProfile = () => {
+  const [parkAdded, setParkAdded] = useState(false);
+  const [park, setPark] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
-  const handleReviewSubmit = (event) => {
-    event.preventDefault();
+  const handleAddPark = () => {
+    // Add the park to the profile
+    // Set parkAdded to true
+    // Set park details
+    setParkAdded(true);
+    setPark({
+      id: 1, // Provide the park ID
+      name: 'Park Name', // Provide the park name
+      // Other park details
+    });
+  };
 
-    // Validate reviewText and rating before saving
-    if (!reviewText || rating === 0) {
-      return false;
+  const handleSaveReview = (review) => {
+    // Check if the park is added to the profile
+    if (!parkAdded) {
+      return;
     }
 
-    // Create a new review object
-    const newReview = {
-      parkId: parkId,
-      reviewText: reviewText,
-      rating: rating,
-      reviewId: Math.floor(Math.random() * 1000) // Generate a random review ID
+    // Attach the review to the park
+    const updatedPark = {
+      ...park,
+      reviews: [...(park.reviews || []), review],
     };
 
-    // Call the onSaveReview function passed from the parent component
-    onSaveReview(newReview);
-
-    // Add the review to the park
-    addReviewToPark(parkId, newReview.reviewId);
-
-    // Clear the form inputs
-    setReviewText('');
-    setRating(0);
+    // Update the park and reviews in the state
+    setPark(updatedPark);
+    setReviews(updatedPark.reviews);
   };
 
   return (
-    <Form onSubmit={handleReviewSubmit}>
-      <Form.Group>
-        <Form.Label>Review Text:</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={3}
-          value={reviewText}
-          onChange={(e) => setReviewText(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Rating:</Form.Label>
-        <Form.Control
-          as="select"
-          value={rating}
-          onChange={(e) => setRating(parseInt(e.target.value))}
-        >
-          <option value={0}>Select rating</option>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-        </Form.Control>
-      </Form.Group>
-      <Button type="submit" variant="primary">Submit Review</Button>
-    </Form>
+    <div>
+      <h2>Park Profile</h2>
+      {parkAdded ? (
+        <div>
+          <h3>Park Details</h3>
+          <p>Park Name: {park.name}</p>
+          {/* Display other park details */}
+          {/* ... */}
+          <h3>Reviews</h3>
+          {reviews.length > 0 ? (
+            reviews.map((review) => (
+              <Card key={review.reviewId}>
+                <Card.Body>
+                  <Card.Text>{review.reviewText}</Card.Text>
+                  <Card.Text>Rating: {review.rating}</Card.Text>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <p>No reviews yet.</p>
+          )}
+          <ReviewPark parkId={park.id} onSaveReview={handleSaveReview} />
+        </div>
+      ) : (
+        <div>
+          <p>Please add the park to your profile to see the reviews.</p>
+          <Button onClick={handleAddPark}>Add Park</Button>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default ReviewPark;
+export default ParkProfile;
