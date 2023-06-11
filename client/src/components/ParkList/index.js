@@ -2,7 +2,7 @@ import React from "react";
 
 const ParkList = ({ parks }) => {
   if (!parks.length) {
-    return <h3>No Thoughts Yet</h3>;
+    return <h3>No Parks Found</h3>;
   }
 
   return (

@@ -8,6 +8,6 @@ db.once("open", async () => {
 
   const destinations = await Destinations.insertMany(parkData);
 
-  console.log("Destinations seeded!");
+  console.log("seeded!");
   process.exit(0);
 });
