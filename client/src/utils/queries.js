@@ -14,3 +14,14 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_PARKS = gql`
+  query getParks {
+    parks {
+      _id
+      title
+      description
+      image
+    }
+  }
+`;
