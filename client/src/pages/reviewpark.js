@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { addReviewToPark } from '../utils/localStorage';
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { addReviewToPark } from "../utils/localStorage";
 
 const ReviewPark = ({ parkId, onSaveReview }) => {
-  const [reviewText, setReviewText] = useState('');
+  const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
 
   const handleReviewSubmit = (event) => {
@@ -19,7 +19,7 @@ const ReviewPark = ({ parkId, onSaveReview }) => {
       parkId: parkId,
       reviewText: reviewText,
       rating: rating,
-      reviewId: Math.floor(Math.random() * 1000) // Generate a random review ID
+      reviewId: Math.floor(Math.random() * 1000), // Generate a random review ID
     };
 
     // Call the onSaveReview function passed from the parent component
@@ -29,7 +29,7 @@ const ReviewPark = ({ parkId, onSaveReview }) => {
     addReviewToPark(parkId, newReview.reviewId);
 
     // Clear the form inputs
-    setReviewText('');
+    setReviewText("");
     setRating(0);
   };
 
@@ -59,7 +59,9 @@ const ReviewPark = ({ parkId, onSaveReview }) => {
           <option value={5}>5</option>
         </Form.Control>
       </Form.Group>
-      <Button type="submit" variant="primary">Submit Review</Button>
+      <Button type="submit" variant="primary">
+        Submit Review
+      </Button>
     </Form>
   );
 };

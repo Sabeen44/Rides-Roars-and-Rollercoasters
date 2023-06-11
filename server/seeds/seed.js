@@ -1,13 +1,11 @@
 const db = require("../config/connection");
-const { Destinations } = require("../models");
-
+const { Park } = require("../models");
 const parkData = require("./parkData.json");
 
 db.once("open", async () => {
-  await Destinations.deleteMany({});
+  await Park.deleteMany({});
+  await Park.create(parkData);
 
-  const destinations = await Destinations.insertMany(parkData);
-
-  console.log("seeded!");
+  console.log("all done!");
   process.exit(0);
 });

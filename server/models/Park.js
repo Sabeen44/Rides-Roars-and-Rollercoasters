@@ -13,6 +13,8 @@ const parkSchema = new Schema({
     type: String,
   },
 
+  review: { type: String },
+
   createdAt: {
     type: Date,
     default: Date.now,

@@ -42,6 +42,7 @@ const typeDefs = gql`
     title: String
     description: String
     image: String
+    review: String
   }
 
   type Query {

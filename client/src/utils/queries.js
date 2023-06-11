@@ -22,6 +22,7 @@ export const QUERY_PARKS = gql`
       title
       description
       image
+      review
     }
   }
 `;
