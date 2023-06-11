@@ -37,8 +37,8 @@ function App() {
         <>
           <Navbar />
           <Routes>
-            <Route path="/" element={< SearchPark />} />
-            <Route path="/saved" element={< ReviewPark />} />
+            <Route path="/" element={<SearchPark />} />
+            <Route path="/saved" element={<ReviewPark />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
