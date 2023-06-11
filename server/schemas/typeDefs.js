@@ -27,6 +27,12 @@ const typeDefs = gql`
     description: String!
   }
 
+  type Review {
+    _id: ID
+    reviewText: String
+    createdAt: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -56,9 +62,10 @@ const typeDefs = gql`
     addPark(park: String): Park
     savePark(parkData: parkInput!): User
     removePark(parkId: ID!): User
-    addReview(reviewData: reviewInput!): User
-    saveReview(reviewData: reviewInput!): User
-    removeReview(reviewId: ID!): User
+    addReview(reviewId: ID!, reviewText: String!): Review
+   
+    removeReview(parkId: ID!, reviewId: ID!): Park
+  }
   }
 `;
 

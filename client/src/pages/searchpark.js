@@ -25,6 +25,8 @@ const SearchPark = () => {
 
   const parks = data?.parks || [];
 
+  const review = [];
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -142,51 +144,51 @@ const SearchPark = () => {
                     {loading ? (
                       <div>Loading...</div>
                     ) : (
-                      <ParkList parks={parks} title="SOme title" />
+                      <ParkList parks={parks} title="Some title" />
                     )}
+
+                    <Button
+                      disabled={savedParkIds?.some(
+                        (savedParkId) => savedParkId === park.parkId
+                      )}
+                      className="btn-block btn-info"
+                      onClick={() => handleSavePark(park.parkId)}
+                    >
+                      {savedParkIds?.some(
+                        (savedParkId) => savedParkId === park.parkId
+                      )
+                        ? "Park saved"
+                        : "Save park"}
+                    </Button>
                   </div>
                 </div>
               </main>
-
-              // <Col md="4" key={park.parkId}>
-              //   <Card border="dark">
-              //     <Card.Body>
-              //       <Card.Title>{park.name}</Card.Title>
-              //       {selectedPark && selectedPark.parkId === park.parkId && (
-              //         <ReviewPark
-              //           parkId={park.parkId}
-              //           onSaveReview={handleSaveReview}
-              //         />
-              //       )}
-              //     </Card.Body>
-              //     {Auth.loggedIn() && (
-              //       <>
-              //         <Button
-              //           disabled={savedParkIds?.some(
-              //             (savedParkId) => savedParkId === park.parkId
-              //           )}
-              //           className="btn-block btn-info"
-              //           onClick={() => handleSavePark(park.parkId)}
-              //         >
-              //           {savedParkIds?.some(
-              //             (savedParkId) => savedParkId === park.parkId
-              //           )
-              //             ? "Park saved"
-              //             : "Save park"}
-              //         </Button>
-              //         <Button
-              //           className="btn-block btn-danger"
-              //           onClick={() => handleRemovePark(park.parkId)}
-              //         >
-              //           Remove park
-              //         </Button>
-              //       </>
-              //     )}
-              //   </Card>
-              // </Col>
             );
           })}
         </Row>
+
+        {/* <Col md="4" key={park.parkId}>
+          <Card border="dark">
+            <Card.Body>
+              <Card.Title>{park.title}</Card.Title>
+              {selectedPark && selectedPark.parkId === park.parkId && (
+                <ReviewPark
+                  parkId={park.parkId}
+                  onSaveReview={handleSaveReview}
+                />
+              )}
+            </Card.Body>
+            {Auth.loggedIn() && (
+              <Button
+                className="btn-block btn-danger"
+                onClick={() => handleRemovePark(park.parkId)}
+              >
+                Remove park
+              </Button>
+              //</>
+            )}
+          </Card>
+        </Col> */}
       </Container>
     </>
   );

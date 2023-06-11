@@ -24,7 +24,6 @@ export const ADD_USER = gql`
   }
 `;
 
-
 export const SAVE_PARK = gql`
   mutation savePark($parkData: ParkInput!) {
     savePark(parkData: $parkData) {
@@ -38,7 +37,6 @@ export const SAVE_PARK = gql`
     }
   }
 `;
-
 
 export const REMOVE_PARK = gql`
   mutation removePark($parkId: ID!) {
@@ -73,6 +71,13 @@ export const REMOVE_REVIEW = gql`
       title
       description
     }
+ `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview($reviewId: ID!) {
+    addReviews(input: { reviewId: $reviewId, reviewText: $reviewText }) {
+      _id
+      reviewsText
+    }
   }
 `;
-

@@ -46,23 +46,24 @@ const resolvers = {
       return { token, user };
     },
 
-    addReview: async (parent, { reviewInput }, context) => {
-      if (context.user) {
-        const newReview = await Review.create({
-          ...reviewInput,
-          reviewUser: context.user.username,
-        });
-
-        return newReview;
-      }
-      throw new AuthenticationError("No Review!");
+    addReview: async (parent, { parkId, commentText }) => {
+      return Park.findOneAndUpdate(
+        { _id: parkId },
+        {
+          $addToSet: { reviews: { reviewText } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
     },
 
     saveReview: async (parent, { reviewData }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { comments: reviewData } },
+          { $push: { reviews: reviewData } },
           { new: true }
         );
 
