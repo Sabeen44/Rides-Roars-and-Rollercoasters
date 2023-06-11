@@ -10,12 +10,20 @@ import {
 import Auth from "../utils/auth";
 import ReviewPark from "./ReviewPark";
 
+import { useQuery } from "@apollo/client";
+import ParkList from "../components/ParkList";
+import { QUERY_PARKS } from "../utils/queries";
+
 const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [savedParkIds, setSavedParkIds] = useState(getSavedParkIds());
   const [savePark, { error }] = useMutation(SAVE_PARK);
   const [selectedPark, setSelectedPark] = useState(null);
+
+  const { loading, data } = useQuery(QUERY_PARKS);
+
+  const parks = data?.parks || [];
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
