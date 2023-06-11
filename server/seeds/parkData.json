@@ -1,125 +1,17 @@
 [
   {
-    "id": "e957da41-3552-4cf6-b636-5babc5cbc4e5",
-    "name": "Walt Disney World® Resort",
-    "slug": "waltdisneyworldresort",
-    "parks": [
-      {
-        "id": "75ea578a-adc8-4116-a54d-dccb60765ef9",
-        "name": "Magic Kingdom Park"
-      },
-      {
-        "id": "47f90d2c-e191-4239-a466-5892ef59a88b",
-        "name": "EPCOT"
-      },
-      {
-        "id": "288747d1-8b4f-4a64-867e-ea7c9b27bad8",
-        "name": "Disney's Hollywood Studios"
-      },
-      {
-        "id": "1c84a229-8862-4648-9c71-378ddd2c7693",
-        "name": "Disney's Animal Kingdom Theme Park"
-      },
-      {
-        "id": "b070cbc5-feaa-4b87-a8c1-f94cca037a18",
-        "name": "Disney's Typhoon Lagoon Water Park"
-      },
-      {
-        "id": "ead53ea5-22e5-4095-9a83-8c29300d7c63",
-        "name": "Disney's Blizzard Beach Water Park"
-      }
-    ]
+    "title": "Walt Disney World® Resort",
+    "description": "fun park",
+    "image": "/images/roller.jpg"
   },
   {
-    "id": "9c6a0987-e519-4d6e-b011-e6c47a60641b",
-    "name": "Walibi Holland",
-    "slug": "walibiholland",
-    "parks": [
-      {
-        "id": "18635b3e-fa23-4284-89dd-9fcd0aaa9c9c",
-        "name": "Walibi Holland"
-      }
-    ]
+    "title": "Walibi Holland",
+    "description": "fun park",
+    "image": "coming soon"
   },
   {
-    "id": "c0eddd5b-da82-4161-9a5f-2eb4ab5f82e7",
-    "name": "Plopsaland De Panne",
-    "slug": "plopsaland-de-panne",
-    "parks": [
-      {
-        "id": "f0ea9b9c-1ccb-4860-bfe6-b5aea7e4db2b",
-        "name": "Plopsaland De Panne"
-      }
-    ]
-  },
-  {
-    "id": "85e3b542-af91-4f8a-8d28-445868a7c8fd",
-    "name": "Europa-Park",
-    "slug": "europa",
-    "parks": [
-      {
-        "id": "639738d3-9574-4f60-ab5b-4c392901320b",
-        "name": "Europa-Park"
-      },
-      {
-        "id": "58392c29-d79d-49e4-9c35-0100d417d24e",
-        "name": "Rulantica"
-      }
-    ]
-  },
-  {
-    "id": "8fba5a14-8d04-455c-acf8-eccaaa0f58d9",
-    "name": "Silver Dollar City",
-    "slug": "silverdollarcity",
-    "parks": [
-      {
-        "id": "d21fac4f-1099-4461-849c-0f8e0d6e85a6",
-        "name": "Silver Dollar City"
-      }
-    ]
-  },
-  {
-    "id": "be4e3681-7e3c-43a5-89e6-bb4863d8fe35",
-    "name": "LEGOLAND California",
-    "slug": "legolandcaliforniaresort",
-    "parks": [
-      {
-        "id": "722116aa-56be-4466-8c6f-a5acbac05da2",
-        "name": "LEGOLAND California"
-      }
-    ]
-  },
-  {
-    "id": "6c3cd0cc-57b5-431b-926c-2658e8104057",
-    "name": "Dollywood",
-    "slug": "dollywood",
-    "parks": [
-      {
-        "id": "7502308a-de08-41a3-b997-961f8275ab3c",
-        "name": "Dollywood"
-      }
-    ]
-  },
-  {
-    "id": "0257ff9f-c73c-4855-b5b4-774755c4d146",
-    "name": "Phantasialand",
-    "slug": "phantasialand",
-    "parks": [
-      {
-        "id": "abb67808-61e3-49ef-996c-1b97ed64fac6",
-        "name": "Phantasialand"
-      }
-    ]
-  },
-  {
-    "id": "22489737-c1f7-4ac9-b79b-b664e5efd866",
-    "name": "Holiday Park",
-    "slug": "holiday-park",
-    "parks": [
-      {
-        "id": "3ad67aac-0b97-4961-8aa8-c3b8d2350873",
-        "name": "Holiday Park"
-      }
-    ]
+    "title": "Plopsaland De Panne",
+    "description": "fun park",
+    "image": "coming soon"
   }
 ]

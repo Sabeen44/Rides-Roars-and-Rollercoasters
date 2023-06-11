@@ -8,20 +8,10 @@ const typeDefs = gql`
     password: String
   }
 
-  type Park {
-    id: ID!
-    name: String
-  }
-
   type Review {
     id: ID!
     title: String!
     content: String!
-  }
-
-  type Comment {
-    id: ID!
-    commentText: String!
   }
 
   input parkInput {
@@ -47,10 +37,22 @@ const typeDefs = gql`
     park: Park
   }
 
+  type Park {
+    _id: ID
+    title: String
+    description: String
+    image: String
+  }
+
+  type Query {
+    parks: [Park]
+    park(parkId: ID!): Park
+  }
+
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addComment(commentId: ID!, commentText: String!): Comment
+
     addPark(park: String): Park
     savePark(parkData: parkInput!): User
     removePark(parkId: ID!): User

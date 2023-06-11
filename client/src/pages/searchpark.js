@@ -10,12 +10,20 @@ import {
 import Auth from "../utils/auth";
 import ReviewPark from "./ReviewPark";
 
+import { useQuery } from "@apollo/client";
+import ParkList from "../components/ParkList";
+import { QUERY_PARKS } from "../utils/queries";
+
 const SearchPark = () => {
   const [searchedParks, setSearchedParks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [savedParkIds, setSavedParkIds] = useState(getSavedParkIds());
   const [savePark, { error }] = useMutation(SAVE_PARK);
   const [selectedPark, setSelectedPark] = useState(null);
+
+  const { loading, data } = useQuery(QUERY_PARKS);
+
+  const parks = data?.parks || [];
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,21 +33,28 @@ const SearchPark = () => {
     }
 
     try {
-      const response = await SearchPark(searchInput);
+      // Use useQuery hook to fetch parks data
 
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
+      // Filter out parks that match searchInput
+      const filteredParks = parks.filter((park) =>
+        park.title.toLowerCase().includes(searchInput.toLowerCase())
+      );
 
-      const { results } = await response.json();
+      // Update searchedParks state with filteredParks
+      setSearchedParks(filteredParks);
 
-      const parkData = results.map((park) => ({
-        parkId: park.id,
-        name: park.name,
-      }));
-
-      setSearchedParks(parkData);
+      // Clear searchInput state
       setSearchInput("");
+
+      //const { results } = await response.json();
+
+      //const parkData = results.map((park) => ({
+      //  parkId: park.id,
+      //  name: park.name,
+      //  }));
+
+      // setSearchedParks(parkData);
+      // setSearchInput("");
     } catch (err) {
       console.error(err);
     }
@@ -120,42 +135,55 @@ const SearchPark = () => {
         <Row>
           {searchedParks.map((park) => {
             return (
-              <Col md="4" key={park.parkId}>
-                <Card border="dark">
-                  <Card.Body>
-                    <Card.Title>{park.name}</Card.Title>
-                    {selectedPark && selectedPark.parkId === park.parkId && (
-                      <ReviewPark
-                        parkId={park.parkId}
-                        onSaveReview={handleSaveReview}
-                      />
+              <main>
+                <div className="flex-row justify-center">
+                  <div className="col-12 col-md-8 mb-3">
+                    {/* If the data is still loading, render a loading message */}
+                    {loading ? (
+                      <div>Loading...</div>
+                    ) : (
+                      <ParkList parks={parks} title="SOme title" />
                     )}
-                  </Card.Body>
-                  {Auth.loggedIn() && (
-                    <>
-                      <Button
-                        disabled={savedParkIds?.some(
-                          (savedParkId) => savedParkId === park.parkId
-                        )}
-                        className="btn-block btn-info"
-                        onClick={() => handleSavePark(park.parkId)}
-                      >
-                        {savedParkIds?.some(
-                          (savedParkId) => savedParkId === park.parkId
-                        )
-                          ? "Park saved"
-                          : "Save park"}
-                      </Button>
-                      <Button
-                        className="btn-block btn-danger"
-                        onClick={() => handleRemovePark(park.parkId)}
-                      >
-                        Remove park
-                      </Button>
-                    </>
-                  )}
-                </Card>
-              </Col>
+                  </div>
+                </div>
+              </main>
+
+              // <Col md="4" key={park.parkId}>
+              //   <Card border="dark">
+              //     <Card.Body>
+              //       <Card.Title>{park.name}</Card.Title>
+              //       {selectedPark && selectedPark.parkId === park.parkId && (
+              //         <ReviewPark
+              //           parkId={park.parkId}
+              //           onSaveReview={handleSaveReview}
+              //         />
+              //       )}
+              //     </Card.Body>
+              //     {Auth.loggedIn() && (
+              //       <>
+              //         <Button
+              //           disabled={savedParkIds?.some(
+              //             (savedParkId) => savedParkId === park.parkId
+              //           )}
+              //           className="btn-block btn-info"
+              //           onClick={() => handleSavePark(park.parkId)}
+              //         >
+              //           {savedParkIds?.some(
+              //             (savedParkId) => savedParkId === park.parkId
+              //           )
+              //             ? "Park saved"
+              //             : "Save park"}
+              //         </Button>
+              //         <Button
+              //           className="btn-block btn-danger"
+              //           onClick={() => handleRemovePark(park.parkId)}
+              //         >
+              //           Remove park
+              //         </Button>
+              //       </>
+              //     )}
+              //   </Card>
+              // </Col>
             );
           })}
         </Row>

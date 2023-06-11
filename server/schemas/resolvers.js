@@ -16,9 +16,8 @@ const resolvers = {
       throw new AuthenticationError("You are not logged in");
     },
 
-    park: async (parent, args, context) => {
-      const parkData = await Park.findOne({ _id: args.parkId });
-      return parkData;
+    parks: async () => {
+      return Park.find().sort({ createdAt: -1 });
     },
   },
 
