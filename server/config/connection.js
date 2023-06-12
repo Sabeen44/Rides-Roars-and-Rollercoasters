@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+require("dotenv").config();
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/ridereviews'
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ridereviews"
 );
 
 module.exports = mongoose.connection;
