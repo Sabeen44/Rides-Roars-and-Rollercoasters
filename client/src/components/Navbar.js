@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 
 import Auth from "../utils/auth";
 
+const navigate = useNavigate();
+
 const AppNavbar = () => {
+  const logInlogOut = () => {
+    if (Auth.loggedIn) {
+      Auth.logout();
+      navigate("/");
+    }
+  };
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
@@ -29,7 +37,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to="/saved">
                     See Your Theme Parks
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link onClick={logInlogOut}>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>

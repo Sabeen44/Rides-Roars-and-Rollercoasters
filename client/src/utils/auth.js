@@ -1,6 +1,10 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
 
+//import { useNavigate } from "react-router-dom";
+
+//const navigate = useNavigate();
+
 // create a new class to instantiate for a user
 class AuthService {
   // get user data
@@ -35,14 +39,16 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+    //window.location.assign("/");
+    //navigate("/");
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem("id_token");
     // this will reload the page and reset the state of the application
-    window.location.assign("/");
+    //window.location.assign("/");
+    //
   }
 }
 
