@@ -116,7 +116,7 @@ const SearchPark = () => {
         <h2 className="pt-5">
           {searchedParks.length
             ? `Viewing ${searchedParks.length} results:`
-            : "Search for a theme park to begin"}
+            : "RIDES, ROARS AND ROLLERCOASTERS"}
         </h2>
         <Form onSubmit={handleFormSubmit}>
           <Form.Group>
