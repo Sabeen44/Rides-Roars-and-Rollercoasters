@@ -4,18 +4,18 @@
     "description": "Walt Disney World® Resort is a large entertainment complex in Florida that consists of four theme parks, two water parks, more than 30 hotels, and many other attractions1. It was opened in 1971 by The Walt Disney Company and is one of the most popular tourist destinations in the world1. Some of the famous theme parks include Magic Kingdom, Epcot, Hollywood Studios, and Animal Kingdom23. Guests can enjoy rides, shows, parades, fireworks, dining, shopping, and meeting Disney characters43. The resort also offers complimentary transportation by bus, boat, monorail, or Skyliner to and from the parks and hotels43.",
     "image": "/images/roller.jpg",
 
-    "review": "We had a fantastic trip"
+    "review": "REVIEW: We had a fantastic trip"
   },
   {
     "title": "Disney's Hollywood Studios",
     "description": "Disney’s Hollywood Studios is a theme park at the Walt Disney World Resort in Bay Lake, Florida, near Orlando. It was initially developed as both a theme park inspired by show business and an operating production studio, with active film and television production services, an animation facility branch, and a functioning backlot",
     "image": "/images/Hollywood-Studios.jpg",
-    "review": "click to write a review"
+    "review": "REVIEW: leave a review"
   },
   {
     "title": "Disney's Animal Kingdom Theme Park",
     "description": "Disney’s Animal Kingdom is a zoological theme park at the Walt Disney World Resort in Bay Lake, Florida, near Orlando. It is owned and operated by The Walt Disney Company through its Parks, Experiences and Products division1. The park is a celebration of the Earth’s animals with a focus on adventure. It distinguishes itself from the rest of Walt Disney World’s theme parks by featuring traditional attractions as well as hundreds of species of live animals. Special designs and provisions were incorporated throughout the park to protect the animals’ welfare",
     "image": "/images/animal-kingdom.jpg",
-    "review": "click to write a review"
+    "review": "REVIEW: leave a review"
   }
 ]

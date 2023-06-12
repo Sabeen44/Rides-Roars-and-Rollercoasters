@@ -21,7 +21,7 @@ const ParkList = ({ parks }) => {
                 width="400"
                 height="300"
               />
-              <div>{park.review}</div>
+              <div class="review">{park.review}</div>
             </div>
           </div>
         ))}
