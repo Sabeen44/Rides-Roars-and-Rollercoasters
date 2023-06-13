@@ -8,7 +8,7 @@ import {
   getSavedParkIds,
 } from "../utils/localStorage";
 import Auth from "../utils/auth";
-import ReviewPark from "./ReviewPark";
+import ReviewPark from "./bob";
 
 import { useQuery } from "@apollo/client";
 import ParkList from "../components/ParkList";
