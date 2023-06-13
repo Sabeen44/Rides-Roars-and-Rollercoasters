@@ -6,9 +6,8 @@ import LoginForm from "./LoginForm";
 
 import Auth from "../utils/auth";
 
-const navigate = useNavigate();
-
 const AppNavbar = () => {
+  const navigate = useNavigate();
   const logInlogOut = () => {
     if (Auth.loggedIn) {
       Auth.logout();
