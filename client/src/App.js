@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 //import ReviewPark from "./pages/ReviewPark";
-import SearchPark from "./pages/SearchPark";
+import SearchPark from "./pages/bob";
 import Navbar from "./components/Navbar";
 
 const httpLink = createHttpLink({
