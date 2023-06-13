@@ -7,7 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import ReviewPark from "./pages/bob";
+import ReviewPark from "./pages/ReviewPark";
 import SearchPark from "./pages/SearchPark";
 import Navbar from "./components/Navbar";
 
